@@ -62,8 +62,8 @@ RUN apt-get update \
     python3 \
     python3-pip \
     python3-wheel \
-    && pip install --break-system-packages --upgrade setuptools \
-    && pip install --break-system-packages -r requirements.txt \
+    && pip install --upgrade setuptools \
+    && pip install -r requirements.txt \
     && apt autoremove -y \
     && apt clean -y \
     && rm -rf /tmp/* /var/tmp/* \
@@ -76,7 +76,7 @@ ENTRYPOINT ["/app/tools.sh"]
 ### Light, CLI only
 FROM base AS light
 
-COPY --from=build /app/full/llama-cli /app/full/llama-completion /app
+COPY --from=build /app/full/llama-cli /app/full/llama-completion /app/
 
 WORKDIR /app
 
